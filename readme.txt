@@ -1,1 +1,1 @@
-hello, this is an app to claculate blood pressure
+hello, this is an app to calculate blood pressure
