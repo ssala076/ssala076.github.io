@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0-ui" />
+    <meta name="theme-color" content="#317EFB">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="icon-512x512.png">
+
+    <title>Blood Pressure Calculator</title>
+    <style>
+        #container {
+            width: 85%;
+            margin: auto;
+            font-size: large;
+            font-family: sans-serif;
+            border: 2px solid darkred;
+            padding: 5px;
+        }
+
+        h1 {
+            background-color: lightpink;
+            color: darkred;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        #in {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        #id {
+            text-align: center;
+            width: 50%;
+        }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').then(reg => {
+                console.log('Successfully registered');
+            }).catch(err => {
+                console.log('Error while registering SW')
+            });
+        }
+    </script>
+    <div id='container'>
+        <h1>Systolic Blood Pressure</h1>
+        <p>You can calculate your systolic blood pressure by multiplying your age by 5 and adding 100. For example, if you're 50 years old, multiply it by 5 to get 250 and add 100 to get 350. This is the average maximum pressure that your blood places on the walls of your blood vessels.</p>
+
+        <p id='in'>Enter Your Age: <input type='number' id='number' name='number' style="text-align: center"></p>
+
+        <p id="pressure">Your systolic blood pressure is <span id='span' readonly>XX</span> millimeters of mercury (mmHg)</p>
+    </div>
+
+    <script>
+        var age;
+        var bloodpressure;
+        window.onload = start();
+
+        function start() {
+            document.querySelector('#number').addEventListener('input', calc, false);
+        }
+
+        function calc() {
+            age = document.querySelector('#number').value;
+            bloodpressure = 100 + age * 5;
+            document.querySelector('span').textContent = bloodpressure;
+            document.querySelector('span').style.color = "red";
+            document.querySelector('span').style.fontSize = "x-large";
+        }
+    </script>
+
+
+</body>
+
+</html>
